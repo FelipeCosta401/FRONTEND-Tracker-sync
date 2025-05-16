@@ -29,7 +29,7 @@ const LoginPage = () => {
   });
 
   return (
-    <div className="min-h-screen h-full bg-background flex flex-col justify-center items-center text-foreground">
+    <div className="min-h-screen h-full bg-background flex flex-col justify-center items-center text-foreground p-4">
       <section className="w-full sm:w-[580px] shadow-lg rounded-md bg-card py-7 p-4 flex flex-col gap-6">
         <img src={logo} className="w-[250px] mx-auto" />
         <h1 className="text-3xl font-bold">Entrar</h1>

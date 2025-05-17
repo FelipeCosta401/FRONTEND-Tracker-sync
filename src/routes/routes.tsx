@@ -1,26 +1,33 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter } from "react-router-dom";
+
+// Routes
+import AuthRoute from "./authRoutes";
 
 // Pages
-import LoginPage from "@/pages/login-pages/LoginPage"
-import App from "@/App"
-import HomePage from "@/pages/agent-pages/home-page/HomePage"
+import LoginPage from "@/pages/login-pages/LoginPage";
+import App from "@/App";
+import HomePage from "@/pages/agent-pages/home-page/HomePage";
 
 const routes = createBrowserRouter([
-    {
-        path: "/login",
-        element: <LoginPage />
-    },
-    {
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/",
+    element: (
+      <AuthRoute>
+        <App />
+      </AuthRoute>
+    ),
+    children: [
+      {
         path: "/",
-        element: <App />,
-        children: [
-            {
-                path: "/",
-                index: true,
-                element: <HomePage />
-            }
-        ]
-    }
-])
+        index: true,
+        element: <HomePage />,
+      },
+    ],
+  },
+]);
 
-export default routes
+export default routes;

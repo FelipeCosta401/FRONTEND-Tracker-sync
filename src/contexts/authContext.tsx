@@ -12,12 +12,14 @@ import type { userInterface } from "@/types/interfaces/userInterfaces";
 import Api from "@/config/Api";
 
 interface AuthContextItems {
+  logout: () => void;
   login: (user: userInterface, token: string) => void;
   token: string;
 }
 
 const DEFAULT_VALUES: AuthContextItems = {
   login: () => {},
+  logout: () => {},
   token: "",
 };
 
@@ -29,7 +31,9 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string>(STORED_TOKEN ? STORED_TOKEN : "");
 
   useEffect(() => {
-    token && localStorage.setItem("token", token);
+    token
+      ? localStorage.setItem("token", token)
+      : localStorage.removeItem("token");
   }, [token]);
 
   async function login(user: userInterface, token: string) {
@@ -42,8 +46,14 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     });
   }
 
+  function logout() {
+    setUser(null);
+    setToken("");
+    localStorage.clear();
+  }
+
   return (
-    <AuthContext.Provider value={{ token, login }}>
+    <AuthContext.Provider value={{ token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -23,7 +24,7 @@ import { MdLogin } from "react-icons/md";
 import logo from "@/assets/logo.png";
 
 const LoginPage = () => {
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
 
   const form = useForm<loginCredentialsInterface>({
     defaultValues: {
@@ -32,6 +33,10 @@ const LoginPage = () => {
     },
     resolver: zodResolver(loginRequestSchema),
   });
+
+  useEffect(() => {
+    logout();
+  }, []);
 
   return (
     <div className="min-h-screen h-full bg-background flex flex-col justify-center items-center text-foreground p-4">

@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import useAuth from "@/hooks/useAuth";
+
 import { loginRequestSchema } from "@/types/schemas/authSchemas";
 import type { loginCredentialsInterface } from "@/types/interfaces/authInterfaces";
 
@@ -14,12 +16,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Loader from "@/components/loader/Loader";
 
 import { MdLogin } from "react-icons/md";
 
 import logo from "@/assets/logo.png";
 
 const LoginPage = () => {
+  const { login } = useAuth();
+
   const form = useForm<loginCredentialsInterface>({
     defaultValues: {
       login: "",
@@ -34,7 +39,7 @@ const LoginPage = () => {
         <img src={logo} className="w-[250px] mx-auto" />
         <h1 className="text-3xl font-bold">Entrar</h1>
         <Form {...form}>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={form.handleSubmit(login)}>
             <FormField
               control={form.control}
               name="login"
@@ -65,9 +70,15 @@ const LoginPage = () => {
                 </FormItem>
               )}
             />
-            <Button className="w-full">
-              Entrar <MdLogin className="!size-5" />
-            </Button>
+            {form.formState.isSubmitting ? (
+              <Button className="w-full">
+                Entrando <Loader />
+              </Button>
+            ) : (
+              <Button className="w-full">
+                Entrar <MdLogin className="!size-5" />
+              </Button>
+            )}
           </form>
         </Form>
       </section>

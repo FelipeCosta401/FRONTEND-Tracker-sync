@@ -9,35 +9,25 @@ import {
 import { type userInterface } from "@/types/interfaces/userInterfaces";
 
 interface userContextItems {
-  user: userInterface;
-  setUser: Dispatch<SetStateAction<userInterface>>;
+  user: userInterface | null;
+  setUser: Dispatch<SetStateAction<userInterface | null>>;
 }
-
-const DEFAULT_USER_VALUES: userInterface = {
-  id: 0,
-  firstAccessAt: null,
-  email: "",
-  name: "",
-  registeredAt: null,
-  registryNumber: 0,
-  role: "ADMIN",
-};
 
 const DEFAULT_VALUES: userContextItems = {
   setUser: () => {},
-  user: DEFAULT_USER_VALUES,
+  user: null,
 };
 
 const UserContext = createContext<userContextItems>(DEFAULT_VALUES);
 
 const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const STORED_USER = localStorage.getItem("user");
-  const [user, setUser] = useState<userInterface>(
-    STORED_USER ? JSON.parse(STORED_USER) : DEFAULT_USER_VALUES
+  const [user, setUser] = useState<userInterface | null>(
+    STORED_USER ? JSON.parse(STORED_USER) : null
   );
 
   useEffect(() => {
-    user && localStorage.setItem("user", JSON.stringify(user));
+    user ? localStorage.setItem("user", JSON.stringify(user)) : localStorage.removeItem("user")
   }, [user]);
 
   return (

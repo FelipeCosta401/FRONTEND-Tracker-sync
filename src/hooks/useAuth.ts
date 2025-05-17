@@ -10,7 +10,8 @@ import { toast } from "sonner";
 
 const useAuth = () => {
   const navigate = useNavigate();
-  const { login: contextLoginMethod } = useContext(AuthContext);
+  const { login: contextLoginMethod, logout: contextLogoutFn } =
+    useContext(AuthContext);
   const authService = new AuthService();
 
   async function login({ login, password }: loginCredentialsInterface) {
@@ -24,13 +25,11 @@ const useAuth = () => {
     }
   }
 
-  // function logout() {
-  //   toast.warning("Saindo...");
-    
-  //   navigate("/login");
-  // }
+  function logout() {
+    contextLogoutFn()
+  }
 
-  return { login };
+  return { login, logout };
 };
 
 export default useAuth;

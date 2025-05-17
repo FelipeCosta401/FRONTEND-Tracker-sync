@@ -2,8 +2,8 @@ import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
-    <div>
-      <header>
+    <div className="h-full min-h-screen bg-background text-foreground">
+      <header className="p-4"> 
         <nav></nav>
       </header>
       <main>

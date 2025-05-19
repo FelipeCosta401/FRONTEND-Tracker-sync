@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { AuthContext } from "@/contexts/authContext";
 import useAuth from "@/hooks/useAuth";
 
 import { loginRequestSchema } from "@/types/schemas/authSchemas";
@@ -24,7 +25,8 @@ import { MdLogin } from "react-icons/md";
 import logo from "@/assets/logo.png";
 
 const LoginPage = () => {
-  const { login, logout } = useAuth();
+  const { logout } = useContext(AuthContext);
+  const { login } = useAuth();
 
   const form = useForm<loginCredentialsInterface>({
     defaultValues: {

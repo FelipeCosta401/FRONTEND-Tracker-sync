@@ -26,7 +26,8 @@ const useAuth = () => {
   }
 
   function logout() {
-    contextLogoutFn()
+    contextLogoutFn();
+    toast.warning("Você foi desconectado!");
   }
 
   return { login, logout };

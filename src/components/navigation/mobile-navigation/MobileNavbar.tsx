@@ -15,7 +15,7 @@ const MobileNavbar = () => {
 
   return (
     user && (
-      <main className="w-full h-14 bg-card rounded-t-md shadow-lg p-2 flex items-center justify-between">
+      <main className="w-full h-14 bg-card rounded-t-md shadow-[0_-4px_6px_rgba(0,0,0,0.2)] p-2 flex items-center justify-between">
         {user.role === "ADMIN" ? (
           <NavOption
             href="#"

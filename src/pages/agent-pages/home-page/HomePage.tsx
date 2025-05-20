@@ -1,9 +1,17 @@
+import {
+  Accordion
+} from "@/components/ui/accordion";
 
+import NewMovementSection from "./new-movement-section/NewMovementSection";
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
-  )
-}
+    <main>
+      <Accordion collapsible type="single">
+        <NewMovementSection />
+      </Accordion>
+    </main>
+  );
+};
 
-export default HomePage
+export default HomePage;

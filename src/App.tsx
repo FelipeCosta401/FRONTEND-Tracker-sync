@@ -9,7 +9,7 @@ const App = () => {
       <header className="p-4 hidden sm:block">
         <WebNavbar />
       </header>
-      <main>
+      <main className="p-4 pb-20 sm:pb-4">
         <Outlet />
       </main>
       <footer className="w-full fixed bottom-0 sm:hidden">
